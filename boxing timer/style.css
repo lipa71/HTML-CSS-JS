@@ -1,56 +1,61 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-family: 'Kanit', sans-serif;   
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: "Kanit", sans-serif;
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    height: 100vh;
-    background-color: black;
-    background-image: url(image.jpg);
-    background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 100vh;
+  background-color: black;
+  background-image: url(image.jpg);
+  background-size: cover;
 }
 
 section {
-    height: 1000px;
-    width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  height: 1000px;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 button {
-    height: 35px;
-    width: 65px;
-    background: rgb(33,26,20);
-    background: linear-gradient(90deg, rgba(33,26,20,0.4380804953560371) 0%,
-     rgba(12,3,23,1) 28%, rgba(43,34,48,1) 73%, rgba(8,33,38,1) 100%);
-    color: aqua;
-    border-color: aqua;
-    margin: 10px 10px 10px 10px;
-    border-radius: 10px;
+  height: 35px;
+  width: 65px;
+  background: rgb(33, 26, 20);
+  background: linear-gradient(
+    90deg,
+    rgba(33, 26, 20, 0.4380804953560371) 0%,
+    rgba(12, 3, 23, 1) 28%,
+    rgba(43, 34, 48, 1) 73%,
+    rgba(8, 33, 38, 1) 100%
+  );
+  color: aqua;
+  border-color: aqua;
+  margin: 10px 10px 10px 10px;
+  border-radius: 10px;
 }
 
 .lista_opcji {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 input {
-    text-align: center;
-    width: 60px;
-    background: transparent;
-    color: white;
+  text-align: center;
+  width: 60px;
+  background: transparent;
+  color: white;
 }
 
 input::-webkit-outer-spin-button,
@@ -58,27 +63,36 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator { background: none; display:none; }
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+  display: none;
+}
 
 label {
-    color: red;
+  color: red;
 }
 
 #runda {
-    display: flex;
-    justify-content: center;
-    width: 140px;
-    background: rgb(217,207,8);
-    background: linear-gradient(90deg, rgba(217,207,8,0.4380804953560371) 3%, rgba(252,240,4,0.4380804953560371) 10%, rgba(207,224,39,1) 28%, rgba(205,226,74,1) 73%, rgba(245,234,152,1) 91%);
-    color: black;
-    margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  width: 140px;
+  background: rgb(217, 207, 8);
+  background: linear-gradient(
+    90deg,
+    rgba(217, 207, 8, 0.4380804953560371) 3%,
+    rgba(252, 240, 4, 0.4380804953560371) 10%,
+    rgba(207, 224, 39, 1) 28%,
+    rgba(205, 226, 74, 1) 73%,
+    rgba(245, 234, 152, 1) 91%
+  );
+  color: black;
+  margin-top: 50px;
 }
 
 #timer {
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    font-size: 100px;
-    color: red;
-    -webkit-text-stroke: 5px black;
-    text-shadow: 7px 2px 4px rgba(165, 186, 48, 0.84);
-
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 100px;
+  color: red;
+  -webkit-text-stroke: 5px black;
+  text-shadow: 7px 2px 4px rgba(165, 186, 48, 0.84);
 }
