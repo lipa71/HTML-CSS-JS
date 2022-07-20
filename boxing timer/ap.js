@@ -20,7 +20,7 @@ start.addEventListener('click', () => {
     var x = czas_do_startu.value;
     var replaced = x.replace(/\D/g, '');
     if (replaced !=='') {
-        var milisec = Number(replaced)
+        var start = Number(replaced)
         };
 
     var y = czas_przerwy.value
@@ -28,14 +28,6 @@ start.addEventListener('click', () => {
     if (replaced !=='') {
         var przerwa = Number(replaced)
         };
-    
-    var z = czas_rundy.value
-    var replaced = z.replace(/\D/g, '');
-    if (replaced !=='') {
-        var timer_rundy = Number(replaced)
-        };    
-    
-    var przerwa2 = przerwa + timer_rundy    
 
     var myArray = timer.innerText.split(':');
     var min = myArray[0];
@@ -87,9 +79,9 @@ start.addEventListener('click', () => {
                                     timer.innerText = '00:00'
                                     }, 1000);
                                 };    
-                        }, 1000);            
+                            }, 1000);            
                     }, przerwa * 1000);
                 };    
                 }, 1000);
-    }, milisec * 1000);    
+    }, start * 1000);    
 });
