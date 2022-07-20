@@ -85,3 +85,5 @@ start.addEventListener('click', () => {
                 }, 1000);
     }, start * 1000);    
 });
+
+var i      =     lol
