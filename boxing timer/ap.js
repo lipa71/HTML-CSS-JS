@@ -9,27 +9,32 @@ const stop = document.getElementById("stop");
 const czas_do_startu = document.getElementById("czas_do_startu");
 const ok = document.getElementById("ok");
 
-ok.addEventListener("click", (zmiana_opcji) => {
+ok.addEventListener("click", () => {
   timer.innerText = czas_rundy.value;
 });
 
 start.addEventListener("click", () => {
-  var x = czas_do_startu.value;
-  var replaced = x.replace(/\D/g, "");
-  if (replaced !== "") {
-    var start = Number(replaced);
+  var x1 = czas_do_startu.value;
+  var replaced1 = x1.replace(/\D/g, "");
+  if (replaced1 !== "") {
+    var start = Number(replaced1);
   }
 
-  var y = czas_przerwy.value;
-  var replaced = y.replace(/\D/g, "");
-  if (replaced !== "") {
-    var przerwa = Number(replaced);
+  var x2 = czas_przerwy.value;
+  var replaced2 = x2.replace(/\D/g, "");
+  if (replaced2 !== "") {
+    var przerwa = Number(replaced2);
+  }
+  var x3 = czas_rundy.value;
+  var replaced3 = x3.replace(/\D/g, "");
+  if (replaced3 !== "") {
+    var czasRundy = Number(replaced3);
   }
 
-  var z = czas_rundy.value;
-  var replaced = z.replace(/\D/g, "");
-  if (replaced !== "") {
-    var czasRundy = Number(replaced);
+  var x4 = runda.textContent;
+  var replaced4 = x4.replace(/\D/g, "");
+  if (replaced4 !== "") {
+    var wskaznik_rundy = Number(replaced4);
   }
 
   var miedzyRundami = przerwa + czasRundy;
@@ -39,28 +44,59 @@ start.addEventListener("click", () => {
   var sec = myArray[1];
 
   setTimeout(function () {
-    var myInterval1 = setInterval(function () {
-      var myInterval2 = setInterval(function () {
-        timer.innerText = min + ":" + sec;
-        if (sec === "00") {
-          sec = 60;
-          min = "0" + (min - 1);
-        }
-        sec--;
-        if (sec < 10) {
-          sec = "0" + sec;
-        }
-        if (sec === 0) {
-          sec = 59;
-          min = "0" + (min - 1);
-        }
-        if (min === "00" && sec === "00") {
-          clearInterval(myInterval2);
-          var koniec = setTimeout(function () {
-            timer.innerText = "00:00";
-          }, 1000);
-        }
-      }, 1000);
-    }, miedzyRundami * 1000);
+    var myInterval = setInterval(function () {
+      timer.innerText = min + ":" + sec;
+      if (sec === "00") {
+        sec = 60;
+        min = "0" + (min - 1);
+      }
+      sec--;
+      if (sec < 10) {
+        sec = "0" + sec;
+      }
+      if (sec === 0) {
+        sec = 59;
+        min = "0" + (min - 1);
+      }
+      if (min === "00" && sec === "00") {
+        clearInterval(myInterval);
+        setTimeout(function () {
+          timer.innerText = "00:00";
+          runda.innerText = wskaznik_rundy + " Runda";
+        }, 1000);
+        wskaznik_rundy++;
+        setTimeout(function () {
+          setInterval(function () {
+            timer.innerText = czas_rundy.value;
+            var myArray = timer.innerText.split(":");
+            var min = myArray[0];
+            var sec = myArray[1];
+            var myInterval = setInterval(function () {
+              timer.innerText = min + ":" + sec;
+              if (sec === "00") {
+                sec = 60;
+                min = "0" + (min - 1);
+              }
+              sec--;
+              if (sec < 10) {
+                sec = "0" + sec;
+              }
+              if (sec === 0) {
+                sec = 59;
+                min = "0" + (min - 1);
+              }
+              if (min === "00" && sec === "00") {
+                clearInterval(myInterval);
+                setTimeout(function () {
+                  timer.innerText = "00:00";
+                  runda.innerText = wskaznik_rundy + " Runda";
+                }, 1000);
+                wskaznik_rundy++;
+              }
+            }, 1000);
+          }, miedzyRundami * 1000);
+        }, przerwa * 1000);
+      }
+    }, 1000);
   }, start * 1000);
 });
