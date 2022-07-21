@@ -26,58 +26,41 @@ start.addEventListener("click", () => {
     var przerwa = Number(replaced);
   }
 
+  var z = czas_rundy.value;
+  var replaced = z.replace(/\D/g, "");
+  if (replaced !== "") {
+    var czasRundy = Number(replaced);
+  }
+
+  var miedzyRundami = przerwa + czasRundy;
+
   var myArray = timer.innerText.split(":");
   var min = myArray[0];
   var sec = myArray[1];
 
-  var liczenie = setTimeout(function () {
-    var myInterval = setInterval(function () {
-      timer.innerText = min + ":" + sec;
-      if (sec === "00") {
-        sec = 60;
-        min = "0" + (min - 1);
-      }
-      sec--;
-      if (sec < 10) {
-        sec = "0" + sec;
-      }
-      if (sec === 0) {
-        sec = 59;
-        min = "0" + (min - 1);
-      }
-      if (min === "00" && sec === "00") {
-        clearInterval(myInterval);
-        var koniec = setTimeout(function () {
-          timer.innerText = "00:00";
-        }, 1000);
-        var liczenie2 = setInterval(function () {
-          timer.innerText = czas_rundy.value;
-          var myArray2 = timer.innerText.split(":");
-          var min2 = myArray2[0];
-          var sec2 = myArray2[1];
-          var myInterval = setInterval(function () {
-            timer.innerText = min2 + ":" + sec2;
-            if (sec2 === "00") {
-              sec2 = 60;
-              min2 = "0" + (min2 - 1);
-            }
-            sec2--;
-            if (sec2 < 10) {
-              sec2 = "0" + sec2;
-            }
-            if (sec2 === 0) {
-              sec2 = 59;
-              min2 = "0" + (min2 - 1);
-            }
-            if (min2 === "00" && sec2 === "00") {
-              clearInterval(myInterval);
-              var koniec = setTimeout(function () {
-                timer.innerText = "00:00";
-              }, 1000);
-            }
+  setTimeout(function () {
+    var myInterval1 = setInterval(function () {
+      var myInterval2 = setInterval(function () {
+        timer.innerText = min + ":" + sec;
+        if (sec === "00") {
+          sec = 60;
+          min = "0" + (min - 1);
+        }
+        sec--;
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+        if (sec === 0) {
+          sec = 59;
+          min = "0" + (min - 1);
+        }
+        if (min === "00" && sec === "00") {
+          clearInterval(myInterval2);
+          var koniec = setTimeout(function () {
+            timer.innerText = "00:00";
           }, 1000);
-        }, przerwa * 1000);
-      }
-    }, 1000);
+        }
+      }, 1000);
+    }, miedzyRundami * 1000);
   }, start * 1000);
 });
