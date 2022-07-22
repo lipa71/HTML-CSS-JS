@@ -43,60 +43,86 @@ start.addEventListener("click", () => {
   var min = myArray[0];
   var sec = myArray[1];
 
-  setTimeout(function () {
-    var myInterval = setInterval(function () {
-      timer.innerText = min + ":" + sec;
-      if (sec === "00") {
-        sec = 60;
-        min = "0" + (min - 1);
-      }
-      sec--;
-      if (sec < 10) {
-        sec = "0" + sec;
-      }
-      if (sec === 0) {
-        sec = 59;
-        min = "0" + (min - 1);
-      }
-      if (min === "00" && sec === "00") {
-        clearInterval(myInterval);
-        setTimeout(function () {
-          timer.innerText = "00:00";
+  setTimeout(() => {
+    var liczenie = setInterval(() => {
+      var myInterval = setInterval(() => {
+        timer.innerText = min + ":" + sec;
+        if (min === "00" && sec === "00") {
+          clearInterval(myInterval);
+          timer.innerText = czasRundy.value;
           runda.innerText = wskaznik_rundy + " Runda";
-        }, 1000);
-        wskaznik_rundy++;
-        setTimeout(function () {
-          setInterval(function () {
-            timer.innerText = czas_rundy.value;
-            var myArray = timer.innerText.split(":");
-            var min = myArray[0];
-            var sec = myArray[1];
-            var myInterval = setInterval(function () {
-              timer.innerText = min + ":" + sec;
-              if (sec === "00") {
-                sec = 60;
-                min = "0" + (min - 1);
-              }
-              sec--;
-              if (sec < 10) {
-                sec = "0" + sec;
-              }
-              if (sec === 0) {
-                sec = 59;
-                min = "0" + (min - 1);
-              }
-              if (min === "00" && sec === "00") {
-                clearInterval(myInterval);
-                setTimeout(function () {
-                  timer.innerText = "00:00";
-                  runda.innerText = wskaznik_rundy + " Runda";
-                }, 1000);
-                wskaznik_rundy++;
-              }
-            }, 1000);
-          }, miedzyRundami * 1000);
-        }, przerwa * 1000);
-      }
-    }, 1000);
+          wskaznik_rundy++;
+        }
+        if (sec === "00") {
+          sec = 60;
+          min = "0" + (min - 1);
+        }
+        sec--;
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+        if (sec === 0) {
+          sec = 59;
+          min = "0" + (min - 1);
+        }
+      }, 1000);
+    }, miedzyRundami * 1000);
   }, start * 1000);
 });
+
+// setTimeout(() => {
+//   var myInterval1 = setInterval(() => {
+//     timer.innerText = min + ":" + sec;
+//     if (sec === "00") {
+//       sec = 60;
+//       min = "0" + (min - 1);
+//     }
+//     sec--;
+//     if (sec < 10) {
+//       sec = "0" + sec;
+//     }
+//     if (sec === 0) {
+//       sec = 59;
+//       min = "0" + (min - 1);
+//     }
+//     if (min === "00" && sec === "00") {
+//       clearInterval(myInterval);
+//       setTimeout(function () {
+//         timer.innerText = "00:00";
+//         runda.innerText = wskaznik_rundy + " Runda";
+//       }, 1000);
+//       wskaznik_rundy++;
+//       var liczenie = setTimeout(() => {
+//         setInterval(() => {
+//           timer.innerText = czas_rundy.value;
+//           var myArray = timer.innerText.split(":");
+//           var min = myArray[0];
+//           var sec = myArray[1];
+//           var myInterval = setInterval(() => {
+//             timer.innerText = min + ":" + sec;
+//             if (sec === "00") {
+//               sec = 60;
+//               min = "0" + (min - 1);
+//             }
+//             sec--;
+//             if (sec < 10) {
+//               sec = "0" + sec;
+//             }
+//             if (sec === 0) {
+//               sec = 59;
+//               min = "0" + (min - 1);
+//             }
+//             if (min === "00" && sec === "00") {
+//               clearInterval(myInterval);
+//               setTimeout(() => {
+//                 timer.innerText = "00:00";
+//                 runda.innerText = wskaznik_rundy + " Runda";
+//               }, 1000);
+//               wskaznik_rundy++;
+//             }
+//           }, 1000);
+//         }, miedzyRundami * 1000);
+//       }, 100);
+//     }
+//   }, 1000);
+// }, start * 1000);
