@@ -17,7 +17,7 @@ start.addEventListener("click", () => {
   var x1 = czas_do_startu.value;
   var replaced1 = x1.replace(/\D/g, "");
   if (replaced1 !== "") {
-    var start = Number(replaced1);
+    var start1 = Number(replaced1);
   }
 
   var x2 = czas_przerwy.value;
@@ -37,92 +37,36 @@ start.addEventListener("click", () => {
     var wskaznik_rundy = Number(replaced4);
   }
 
-  var miedzyRundami = przerwa + czasRundy;
-
   var myArray = timer.innerText.split(":");
   var min = myArray[0];
   var sec = myArray[1];
+  const min2 = myArray[0];
+  const sec2 = myArray[1];
 
-  setTimeout(() => {
-    var liczenie = setInterval(() => {
-      var myInterval = setInterval(() => {
-        timer.innerText = min + ":" + sec;
-        if (min === "00" && sec === "00") {
-          clearInterval(myInterval);
-          timer.innerText = czasRundy.value;
-          runda.innerText = wskaznik_rundy + " Runda";
-          wskaznik_rundy++;
-        }
-        if (sec === "00") {
-          sec = 60;
-          min = "0" + (min - 1);
-        }
-        sec--;
-        if (sec < 10) {
-          sec = "0" + sec;
-        }
-        if (sec === 0) {
-          sec = 59;
-          min = "0" + (min - 1);
-        }
-      }, 1000);
-    }, miedzyRundami * 1000);
-  }, start * 1000);
+  var miedzyRundami = przerwa + czasRundy;
+
+  var liczenie = setInterval(() => {
+    var myInterval = setInterval(() => {
+      timer.innerText = min + ":" + sec;
+      if (min === "00" && sec === "00") {
+        clearInterval(myInterval);
+        wskaznik_rundy++;
+        runda.innerText = wskaznik_rundy + " Runda";
+        min = min2;
+        sec = sec2;
+      }
+      if (sec === "00") {
+        sec = 60;
+        min = "0" + (min - 1);
+      }
+      sec--;
+      if (sec < 10) {
+        sec = "0" + sec;
+      }
+      if (sec === 0) {
+        sec = 59;
+        min = "0" + (min - 1);
+      }
+    }, 1000);
+  }, miedzyRundami * 1000);
 });
-
-// setTimeout(() => {
-//   var myInterval1 = setInterval(() => {
-//     timer.innerText = min + ":" + sec;
-//     if (sec === "00") {
-//       sec = 60;
-//       min = "0" + (min - 1);
-//     }
-//     sec--;
-//     if (sec < 10) {
-//       sec = "0" + sec;
-//     }
-//     if (sec === 0) {
-//       sec = 59;
-//       min = "0" + (min - 1);
-//     }
-//     if (min === "00" && sec === "00") {
-//       clearInterval(myInterval);
-//       setTimeout(function () {
-//         timer.innerText = "00:00";
-//         runda.innerText = wskaznik_rundy + " Runda";
-//       }, 1000);
-//       wskaznik_rundy++;
-//       var liczenie = setTimeout(() => {
-//         setInterval(() => {
-//           timer.innerText = czas_rundy.value;
-//           var myArray = timer.innerText.split(":");
-//           var min = myArray[0];
-//           var sec = myArray[1];
-//           var myInterval = setInterval(() => {
-//             timer.innerText = min + ":" + sec;
-//             if (sec === "00") {
-//               sec = 60;
-//               min = "0" + (min - 1);
-//             }
-//             sec--;
-//             if (sec < 10) {
-//               sec = "0" + sec;
-//             }
-//             if (sec === 0) {
-//               sec = 59;
-//               min = "0" + (min - 1);
-//             }
-//             if (min === "00" && sec === "00") {
-//               clearInterval(myInterval);
-//               setTimeout(() => {
-//                 timer.innerText = "00:00";
-//                 runda.innerText = wskaznik_rundy + " Runda";
-//               }, 1000);
-//               wskaznik_rundy++;
-//             }
-//           }, 1000);
-//         }, miedzyRundami * 1000);
-//       }, 100);
-//     }
-//   }, 1000);
-// }, start * 1000);
