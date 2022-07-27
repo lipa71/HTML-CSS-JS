@@ -15,28 +15,27 @@
   </head>
   <body>
     <section>
-      <div class="przyciski">
-        <button id="opcje">Opcje</button>
+      <div class="buttons">
+        <button id="options">Options</button>
       </div>
-      <div class="lista_opcji">
-        <label for="liczba_rund">Liczba Rund</label>
-        <input type="number" id="liczba_rund" value="12" />
-        <label for="czas_rundy">Czas Rundy</label>
-        <input type="time" id="czas_rundy" value="03:00" />
-        <label for="czas_przerwy">Czas Przerwy</label>
-        <input type="time" id="czas_przerwy" value="00:10" />
-        <label for="czas_do_startu">Czas do Startu</label>
-        <input type="time" id="czas_do_startu" value="00:01" />
+      <div class="option_list">
+        <label for="number_of_rounds">Number of rounds</label>
+        <input type="number" id="number_of_rounds" value="12" />
+        <label for="round_time">Round time</label>
+        <input type="time" id="round_time" value="03:00" />
+        <label for="break_time">Break time</label>
+        <input type="time" id="break_time" value="00:10" />
+        <label for="time_to_start">Time to start</label>
+        <input type="time" id="time_to_start" value="00:01" />
         <button id="ok">OK</button>
       </div>
-      <div id="runda">1 Runda</div>
+      <div id="round">1 Round</div>
       <div id="timer">03:00</div>
-      <div class="przyciski">
+      <div class="buttons">
         <button id="start">START</button>
         <button id="stop">STOP</button>
       </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="ap.js"></script>
   </body>
 </html>

@@ -28,7 +28,7 @@ section {
 
 button {
   height: 35px;
-  width: 65px;
+  width: 80px;
   background: rgb(33, 26, 20);
   background: linear-gradient(
     90deg,
@@ -43,7 +43,7 @@ button {
   border-radius: 10px;
 }
 
-.lista_opcji {
+.option_list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -72,7 +72,7 @@ label {
   color: red;
 }
 
-#runda {
+#round {
   display: flex;
   justify-content: center;
   width: 140px;
