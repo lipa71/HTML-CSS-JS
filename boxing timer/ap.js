@@ -42,56 +42,71 @@ ok.addEventListener("click", () => {
     let sec = min_and_sec[1];
     const min2 = min_and_sec[0];
     const sec2 = min_and_sec[1];
-    setTimeout(() => {
-      const myInterval1 = setInterval(() => {
-        timer.innerText = `${min}:${sec}`;
-        if (min === "00" && sec === "00") {
-          clearInterval(myInterval1);
-          roundNumber++;
-          round.innerText = roundNumber + " Runda";
-          min = min2;
-          sec = sec2;
-          var peroid = 12;
-          while (peroid >= 4) {
-            setTimeout(function myInterval2() {
-              setInterval(() => {
-                timer.innerText = `${min}:${sec}`;
-                if (min === "00" && sec === "00") {
-                  clearInterval(myInterval2);
-                  round.innerText = roundNumber + " Runda";
-                  min = min2;
-                  sec = sec2;
-                  peroid = peroid - 2;
-                }
-                if (sec === "00") {
-                  sec = 60;
-                  min = "0" + (min - 1);
-                }
-                sec--;
-                if (sec < 10) {
-                  sec = "0" + sec;
-                }
-                if (sec === 0) {
-                  sec = 59;
-                  min = "0" + (min - 1);
-                }
+    const counting1 = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const myInterval1 = setInterval(() => {
+            timer.innerText = `${min}:${sec}`;
+            if (min === "00" && sec === "00") {
+              clearInterval(myInterval1);
+              setTimeout(() => {
+                roundNumber++;
+                round.innerText = roundNumber + " Runda";
+                min = min2;
+                sec = sec2;
+                resolve();
               }, 1000);
-            }, breakTime * 1000);
-          }
-        }
-        if (sec === "00") {
-          sec = 60;
-          min = "0" + (min - 1);
-        }
-        sec--;
-        if (sec < 10) {
-          sec = "0" + sec;
-        }
-        if (sec === 0) {
-          sec = 59;
-          min = "0" + (min - 1);
-        }
-      }, 1000);
-    }, startTime * 1000);
+            }
+            if (sec === "00") {
+              sec = 60;
+              min = "0" + (min - 1);
+            }
+            sec--;
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            if (sec === 0) {
+              sec = 59;
+              min = "0" + (min - 1);
+            }
+          }, 1000);
+        }, startTime * 1000);
+      });
+    };
+
+    const counting2 = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const myInterval2 = setInterval(() => {
+            timer.innerText = `${min}:${sec}`;
+            if (min === "00" && sec === "00") {
+              clearInterval(myInterval2);
+              setTimeout(() => {
+                roundNumber++;
+                round.innerText = roundNumber + " Runda";
+                min = min2;
+                sec = sec2;
+                resolve();
+                counting2();
+              }, 1000);
+            }
+            if (sec === "00") {
+              sec = 60;
+              min = "0" + (min - 1);
+            }
+            sec--;
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            if (sec === 0) {
+              sec = 59;
+              min = "0" + (min - 1);
+            }
+          }, 1000);
+        }, breakTime * 1000);
+      });
+    };
+
+    counting1().then(counting2);
   });
 });
