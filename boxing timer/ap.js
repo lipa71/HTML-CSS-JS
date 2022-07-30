@@ -21,54 +21,85 @@ ok.addEventListener("click", () => {
   if (replaced2 !== "") {
     var breakTime = Number(replaced2);
   }
-  const x3 = round_time.value;
+
+  const x3 = round.textContent;
   const replaced3 = x3.replace(/\D/g, "");
   if (replaced3 !== "") {
-    var roundTime = Number(replaced3);
+    var roundNumber = Number(replaced3);
   }
 
-  const x4 = round.textContent;
+  const x4 = number_of_rounds.value;
   const replaced4 = x4.replace(/\D/g, "");
   if (replaced4 !== "") {
-    var round_number = Number(replaced4);
+    var numberOfrounds = Number(replaced4);
   }
-
-  const min_and_sec = timer.innerText.split(":");
-  let min = min_and_sec[0];
-  let sec = min_and_sec[1];
-  const min2 = min_and_sec[0];
-  const sec2 = min_and_sec[1];
-
-  const bettwenRounds = breakTime + roundTime;
 
   timer.innerText = round_time.value;
 
   start.addEventListener("click", () => {
+    const min_and_sec = timer.innerText.split(":");
+    let min = min_and_sec[0];
+    let sec = min_and_sec[1];
+    const min2 = min_and_sec[0];
+    const sec2 = min_and_sec[1];
     setTimeout(() => {
-      const counting = setInterval(() => {
-        const myInterval = setInterval(() => {
-          timer.innerText = min + ":" + sec;
-          if (min === "00" && sec === "00") {
-            clearInterval(myInterval);
-            round_number++;
-            round.innerText = round_number + " Runda";
-            min = min2;
-            sec = sec2;
-          }
-          if (sec === "00") {
-            sec = 60;
-            min = "0" + (min - 1);
-          }
-          sec--;
-          if (sec < 10) {
-            sec = "0" + sec;
-          }
-          if (sec === 0) {
-            sec = 59;
-            min = "0" + (min - 1);
-          }
-        }, 1000);
-      }, bettwenRounds * 1000);
-    }, startTime * 300);
+      const myInterval1 = setInterval(() => {
+        timer.innerText = `${min}:${sec}`;
+        if (min === "00" && sec === "00") {
+          clearInterval(myInterval1);
+          roundNumber++;
+          round.innerText = roundNumber + " Runda";
+          min = min2;
+          sec = sec2;
+          setTimeout(function myInterval2() {
+            setInterval(() => {
+              timer.innerText = `${min}:${sec}`;
+              if (
+                min === "00" &&
+                sec === "00" &&
+                roundNumber > numberOfrounds
+              ) {
+                clearInterval(myInterval2);
+                round.innerText = roundNumber + " Runda";
+                min = min2;
+                sec = sec2;
+                roundNumber++;
+                setTimeout(myInterval2, breakTime * 1000);
+              }
+              if (min === "00" && sec === "00") {
+                clearInterval(myInterval2);
+                round.innerText = roundNumber + " Runda";
+                min = min2;
+                sec = sec2;
+              }
+              if (sec === "00") {
+                sec = 60;
+                min = "0" + (min - 1);
+              }
+              sec--;
+              if (sec < 10) {
+                sec = "0" + sec;
+              }
+              if (sec === 0) {
+                sec = 59;
+                min = "0" + (min - 1);
+              }
+            }, 1000);
+          }, breakTime * 1000);
+        }
+        if (sec === "00") {
+          sec = 60;
+          min = "0" + (min - 1);
+        }
+        sec--;
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+        if (sec === 0) {
+          sec = 59;
+          min = "0" + (min - 1);
+        }
+      }, 1000);
+    }, startTime * 1000);
   });
 });
