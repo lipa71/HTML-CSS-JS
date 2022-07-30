@@ -51,41 +51,33 @@ ok.addEventListener("click", () => {
           round.innerText = roundNumber + " Runda";
           min = min2;
           sec = sec2;
-          setTimeout(function myInterval2() {
-            setInterval(() => {
-              timer.innerText = `${min}:${sec}`;
-              if (
-                min === "00" &&
-                sec === "00" &&
-                roundNumber > numberOfrounds
-              ) {
-                clearInterval(myInterval2);
-                round.innerText = roundNumber + " Runda";
-                min = min2;
-                sec = sec2;
-                roundNumber++;
-                setTimeout(myInterval2, breakTime * 1000);
-              }
-              if (min === "00" && sec === "00") {
-                clearInterval(myInterval2);
-                round.innerText = roundNumber + " Runda";
-                min = min2;
-                sec = sec2;
-              }
-              if (sec === "00") {
-                sec = 60;
-                min = "0" + (min - 1);
-              }
-              sec--;
-              if (sec < 10) {
-                sec = "0" + sec;
-              }
-              if (sec === 0) {
-                sec = 59;
-                min = "0" + (min - 1);
-              }
-            }, 1000);
-          }, breakTime * 1000);
+          var peroid = 12;
+          while (peroid >= 4) {
+            setTimeout(function myInterval2() {
+              setInterval(() => {
+                timer.innerText = `${min}:${sec}`;
+                if (min === "00" && sec === "00") {
+                  clearInterval(myInterval2);
+                  round.innerText = roundNumber + " Runda";
+                  min = min2;
+                  sec = sec2;
+                  peroid = peroid - 2;
+                }
+                if (sec === "00") {
+                  sec = 60;
+                  min = "0" + (min - 1);
+                }
+                sec--;
+                if (sec < 10) {
+                  sec = "0" + sec;
+                }
+                if (sec === 0) {
+                  sec = 59;
+                  min = "0" + (min - 1);
+                }
+              }, 1000);
+            }, breakTime * 1000);
+          }
         }
         if (sec === "00") {
           sec = 60;
