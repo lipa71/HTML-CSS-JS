@@ -44,11 +44,12 @@ button {
 }
 
 .option_list {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  visibility: hidden;
 }
 
 input {

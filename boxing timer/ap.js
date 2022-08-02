@@ -8,8 +8,23 @@ const stop = document.getElementById("stop");
 const time_to_start = document.getElementById("time_to_start");
 const ok = document.getElementById("ok");
 const start = document.getElementById("start");
+const option_list = document.querySelector(".option_list");
+
+options.addEventListener("click", () => {
+  var x = option_list;
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+    x.style.visibility = "visible";
+  } else {
+    x.style.display = "none";
+  }
+});
 
 ok.addEventListener("click", () => {
+  timer.innerText = round_time.value;
+});
+
+start.addEventListener("click", () => {
   const x1 = time_to_start.value;
   const replaced1 = x1.replace(/\D/g, "");
   if (replaced1 !== "") {
@@ -33,80 +48,80 @@ ok.addEventListener("click", () => {
   if (replaced4 !== "") {
     var numberOfrounds = Number(replaced4);
   }
+  const min_and_sec = timer.innerText.split(":");
+  let min = min_and_sec[0];
+  let sec = min_and_sec[1];
+  const min2 = min_and_sec[0];
+  const sec2 = min_and_sec[1];
 
-  timer.innerText = round_time.value;
+  const counting1 = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const myInterval1 = setInterval(() => {
+          timer.innerText = `${min}:${sec}`;
+          if (min === "00" && sec === "00") {
+            clearInterval(myInterval1);
+            setTimeout(() => {
+              roundNumber++;
+              round.innerText = roundNumber + " Round";
+              min = min2;
+              sec = sec2;
+              resolve();
+            }, 1000);
+          }
+          if (sec === "00") {
+            sec = 60;
+            min = "0" + (min - 1);
+          }
+          sec--;
+          if (sec < 10) {
+            sec = "0" + sec;
+          }
+          if (sec === 0) {
+            sec = 59;
+            min = "0" + (min - 1);
+          }
+        }, 1000);
+      }, startTime * 1000);
+    });
+  };
 
-  start.addEventListener("click", () => {
-    const min_and_sec = timer.innerText.split(":");
-    let min = min_and_sec[0];
-    let sec = min_and_sec[1];
-    const min2 = min_and_sec[0];
-    const sec2 = min_and_sec[1];
-    const counting1 = () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const myInterval1 = setInterval(() => {
-            timer.innerText = `${min}:${sec}`;
-            if (min === "00" && sec === "00") {
-              clearInterval(myInterval1);
+  const counting2 = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const myInterval2 = setInterval(() => {
+          timer.innerText = `${min}:${sec}`;
+          if (min === "00" && sec === "00") {
+            clearInterval(myInterval2);
+            if (roundNumber === numberOfrounds) {
+              resolve();
+            } else {
               setTimeout(() => {
                 roundNumber++;
-                round.innerText = roundNumber + " Runda";
-                min = min2;
-                sec = sec2;
-                resolve();
-              }, 1000);
-            }
-            if (sec === "00") {
-              sec = 60;
-              min = "0" + (min - 1);
-            }
-            sec--;
-            if (sec < 10) {
-              sec = "0" + sec;
-            }
-            if (sec === 0) {
-              sec = 59;
-              min = "0" + (min - 1);
-            }
-          }, 1000);
-        }, startTime * 1000);
-      });
-    };
-
-    const counting2 = () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const myInterval2 = setInterval(() => {
-            timer.innerText = `${min}:${sec}`;
-            if (min === "00" && sec === "00") {
-              clearInterval(myInterval2);
-              setTimeout(() => {
-                roundNumber++;
-                round.innerText = roundNumber + " Runda";
+                round.innerText = roundNumber + " Round";
                 min = min2;
                 sec = sec2;
                 resolve();
                 counting2();
               }, 1000);
             }
-            if (sec === "00") {
-              sec = 60;
-              min = "0" + (min - 1);
-            }
-            sec--;
-            if (sec < 10) {
-              sec = "0" + sec;
-            }
-            if (sec === 0) {
-              sec = 59;
-              min = "0" + (min - 1);
-            }
-          }, 1000);
-        }, breakTime * 1000);
-      });
-    };
+          }
+          if (sec === "00") {
+            sec = 60;
+            min = "0" + (min - 1);
+          }
+          sec--;
+          if (sec < 10) {
+            sec = "0" + sec;
+          }
+          if (sec === 0) {
+            sec = 59;
+            min = "0" + (min - 1);
+          }
+        }, 1000);
+      }, breakTime * 1000);
+    });
+  };
 
-    counting1().then(counting2);
-  });
+  counting1().then(counting2);
 });
