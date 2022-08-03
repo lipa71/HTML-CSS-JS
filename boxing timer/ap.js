@@ -4,19 +4,19 @@ const round_time = document.getElementById("round_time");
 const break_time = document.getElementById("break_time");
 const round = document.getElementById("round");
 const timer = document.getElementById("timer");
-const stop = document.getElementById("stop");
+const reset = document.getElementById("reset");
 const time_to_start = document.getElementById("time_to_start");
 const ok = document.getElementById("ok");
 const start = document.getElementById("start");
 const option_list = document.querySelector(".option_list");
+const pause = document.getElementById("pause");
+const resume = document.getElementById("resume");
 
 options.addEventListener("click", () => {
-  var x = option_list;
-  if (x.style.display === "none") {
-    x.style.display = "flex";
-    x.style.visibility = "visible";
+  if (option_list.style.display === "none") {
+    option_list.style.display = "flex";
   } else {
-    x.style.display = "none";
+    option_list.style.display = "none";
   }
 });
 
@@ -55,10 +55,13 @@ start.addEventListener("click", () => {
   const sec2 = min_and_sec[1];
 
   const counting1 = () => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         const myInterval1 = setInterval(() => {
           timer.innerText = `${min}:${sec}`;
+          pause.addEventListener("click", () => {
+            clearInterval(myInterval1);
+          });
           if (min === "00" && sec === "00") {
             clearInterval(myInterval1);
             setTimeout(() => {
@@ -87,10 +90,13 @@ start.addEventListener("click", () => {
   };
 
   const counting2 = () => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         const myInterval2 = setInterval(() => {
           timer.innerText = `${min}:${sec}`;
+          pause.addEventListener("click", () => {
+            clearInterval(myInterval2);
+          });
           if (min === "00" && sec === "00") {
             clearInterval(myInterval2);
             if (roundNumber === numberOfrounds) {
@@ -124,4 +130,46 @@ start.addEventListener("click", () => {
   };
 
   counting1().then(counting2);
+
+  resume.addEventListener("click", () => {
+    const counting3 = () => {
+      return new Promise((resolve) => {
+        const myInterval3 = setInterval(() => {
+          timer.innerText = `${min}:${sec}`;
+          pause.addEventListener("click", () => {
+            clearInterval(myInterval3);
+          });
+          if (min === "00" && sec === "00") {
+            clearInterval(myInterval3);
+            if (roundNumber === numberOfrounds) {
+              resolve();
+            } else {
+              setTimeout(() => {
+                roundNumber++;
+                round.innerText = roundNumber + " Round";
+                min = min2;
+                sec = sec2;
+                resolve();
+                counting2();
+              }, 1000);
+            }
+          }
+          if (sec === "00") {
+            sec = 60;
+            min = "0" + (min - 1);
+          }
+          sec--;
+          if (sec < 10) {
+            sec = "0" + sec;
+          }
+          if (sec === 0) {
+            sec = 59;
+            min = "0" + (min - 1);
+          }
+        }, 1000);
+      });
+    };
+
+    counting3().then(counting2);
+  });
 });
