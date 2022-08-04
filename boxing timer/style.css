@@ -28,7 +28,7 @@ section {
 
 button {
   height: 35px;
-  width: 80px;
+  width: 85px;
   background: rgb(33, 26, 20);
   background: linear-gradient(
     90deg,
@@ -41,6 +41,16 @@ button {
   border-color: aqua;
   margin: 10px 10px 10px 10px;
   border-radius: 10px;
+}
+
+#resume {
+  /* visibility: hidden; */
+  display: none;
+}
+
+#pause {
+  /* visibility: hidden; */
+  display: none;
 }
 
 .option_list {

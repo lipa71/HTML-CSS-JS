@@ -24,7 +24,14 @@ ok.addEventListener("click", () => {
   timer.innerText = round_time.value;
 });
 
+reset.addEventListener("click", () => {
+  window.location.reload();
+});
+
 start.addEventListener("click", () => {
+  options.style.visibility = "hidden";
+  start.style.display = "none";
+  pause.style.display = "inline";
   const x1 = time_to_start.value;
   const replaced1 = x1.replace(/\D/g, "");
   if (replaced1 !== "") {
@@ -60,7 +67,10 @@ start.addEventListener("click", () => {
         const myInterval1 = setInterval(() => {
           timer.innerText = `${min}:${sec}`;
           pause.addEventListener("click", () => {
+            pause.style.display = "none";
+            resume.style.display = "inline";
             clearInterval(myInterval1);
+            reject();
           });
           if (min === "00" && sec === "00") {
             clearInterval(myInterval1);
@@ -96,6 +106,9 @@ start.addEventListener("click", () => {
           timer.innerText = `${min}:${sec}`;
           pause.addEventListener("click", () => {
             clearInterval(myInterval2);
+            pause.style.display = "none";
+            resume.style.display = "inline";
+            reject();
           });
           if (min === "00" && sec === "00") {
             clearInterval(myInterval2);
@@ -129,47 +142,68 @@ start.addEventListener("click", () => {
     });
   };
 
-  counting1().then(counting2);
-
-  resume.addEventListener("click", () => {
-    const counting3 = () => {
-      return new Promise((resolve) => {
-        const myInterval3 = setInterval(() => {
-          timer.innerText = `${min}:${sec}`;
-          pause.addEventListener("click", () => {
-            clearInterval(myInterval3);
-          });
-          if (min === "00" && sec === "00") {
-            clearInterval(myInterval3);
-            if (roundNumber === numberOfrounds) {
+  const counting3 = () => {
+    return new Promise((resolve, reject) => {
+      const myInterval3 = setInterval(() => {
+        timer.innerText = `${min}:${sec}`;
+        pause.addEventListener("click", () => {
+          clearInterval(myInterval3);
+          pause.style.display = "none";
+          resume.style.display = "inline";
+          reject();
+        });
+        if (min === "00" && sec === "00") {
+          clearInterval(myInterval3);
+          if (roundNumber === numberOfrounds) {
+            resolve();
+          } else {
+            setTimeout(() => {
+              roundNumber++;
+              round.innerText = roundNumber + " Round";
+              min = min2;
+              sec = sec2;
               resolve();
-            } else {
-              setTimeout(() => {
-                roundNumber++;
-                round.innerText = roundNumber + " Round";
-                min = min2;
-                sec = sec2;
-                resolve();
-                counting2();
-              }, 1000);
-            }
+            }, 1000);
           }
-          if (sec === "00") {
-            sec = 60;
-            min = "0" + (min - 1);
-          }
-          sec--;
-          if (sec < 10) {
-            sec = "0" + sec;
-          }
-          if (sec === 0) {
-            sec = 59;
-            min = "0" + (min - 1);
-          }
-        }, 1000);
-      });
-    };
+        }
+        if (sec === "00") {
+          sec = 60;
+          min = "0" + (min - 1);
+        }
+        sec--;
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+        if (sec === 0) {
+          sec = 59;
+          min = "0" + (min - 1);
+        }
+      }, 1000);
+    });
+  };
 
-    counting3().then(counting2);
+  async function async2() {
+    try {
+      await counting3();
+      await counting2();
+    } catch {
+      return;
+    }
+  }
+
+  async function async1() {
+    try {
+      await counting1();
+      await counting2();
+    } catch {
+      return;
+    }
+  }
+
+  async1();
+  resume.addEventListener("click", () => {
+    resume.style.display = "none";
+    pause.style.display = "inline";
+    async2();
   });
 });
