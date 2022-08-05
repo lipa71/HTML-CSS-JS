@@ -14,9 +14,12 @@
     <title>Boxing Timer</title>
   </head>
   <body>
+    <div id="break_timer">00.00</div>
+    <div id="start_timer">00.10</div>
     <section>
       <div class="buttons">
-        <button id="options">Options</button>
+        <button id="options1">Options</button>
+        <button id="options2">Options</button>
       </div>
       <div class="option_list">
         <label for="number_of_rounds">Number of rounds</label>
@@ -26,11 +29,13 @@
         <label for="break_time">Break time</label>
         <input type="time" id="break_time" value="00:10" />
         <label for="time_to_start">Time to start</label>
-        <input type="time" id="time_to_start" value="00:01" />
+        <input type="time" id="time_to_start" value="00:10" />
         <button id="ok">Ok</button>
       </div>
       <div id="round">1 Round</div>
-      <div id="timer">03:00</div>
+      <div id="timer_container">
+        <div id="timer">03:00</div>
+      </div>
       <div class="buttons">
         <button id="start">Start</button>
         <button id="pause">Pause</button>
