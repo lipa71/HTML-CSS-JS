@@ -41,6 +41,7 @@ start.addEventListener("click", () => {
   options1.style.visibility = "hidden";
   start.style.display = "none";
   pause.style.display = "inline";
+
   const x1 = time_to_start.value;
   const replaced1 = x1.replace(/\D/g, "");
   if (replaced1 !== "") {
@@ -85,13 +86,13 @@ start.addEventListener("click", () => {
       break_timer.innerText = `${break_min}:${break_sec}`;
       break_timer.style.display = "flex";
       if (break_min === "00" && break_sec === "00") {
-        setTimeout(() => {
-          clearInterval(breakInterval);
-          break_timer.style.display = "none";
-          break_min = break_min2;
-          break_sec = break_sec2;
-          // return;
-        }, 1000);
+        // setTimeout(() => {
+        clearInterval(breakInterval);
+        break_min = break_min2;
+        break_sec = break_sec2;
+        break_timer.style.display = "none";
+        return;
+        // }, 1000);
       }
       if (break_sec === "00") {
         break_sec = 60;
@@ -152,7 +153,6 @@ start.addEventListener("click", () => {
             resolve();
           } else {
             setTimeout(() => {
-              break_timer.style.display = "flex";
               break_counting();
               roundNumber++;
               round.innerText = roundNumber + " Round";
@@ -195,8 +195,8 @@ start.addEventListener("click", () => {
               resolve();
             } else {
               setTimeout(() => {
-                break_timer.style.display = "flex";
                 break_counting();
+                break_timer.style.display = "flex";
                 roundNumber++;
                 round.innerText = roundNumber + " Round";
                 min = min2;
