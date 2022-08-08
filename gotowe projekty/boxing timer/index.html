@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=8.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Kdam+Thmor+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <title>Boxing Timer</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="break_timer">00.00</div>
+      <div id="start_timer">00.10</div>
+      <section>
+        <div class="buttons">
+          <button id="options1">Options</button>
+          <button id="options2">Options</button>
+        </div>
+        <div class="option_list">
+          <label for="number_of_rounds">Number of rounds</label>
+          <input type="number" id="number_of_rounds" value="12" />
+          <label for="round_time">Round time</label>
+          <input type="time" id="round_time" value="03:00" />
+          <label for="break_time">Break time</label>
+          <input type="time" id="break_time" value="00:10" />
+          <label for="time_to_start">Time to start</label>
+          <input type="time" id="time_to_start" value="00:10" />
+          <button id="ok">Ok</button>
+        </div>
+        <div id="round">1 Round</div>
+        <div id="timer_container">
+          <div id="timer">03:00</div>
+        </div>
+        <div class="buttons">
+          <button id="start">Start</button>
+          <button id="pause">Pause</button>
+          <button id="resume">Resume</button>
+          <button id="reset">Reset</button>
+        </div>
+      </section>
+    </div>
+    <script src="ap.js"></script>
+  </body>
+</html>
