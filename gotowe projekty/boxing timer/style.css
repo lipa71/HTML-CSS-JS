@@ -1,6 +1,4 @@
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
   font-size: 20px;
   font-family: "Kanit", sans-serif;
@@ -17,9 +15,8 @@ body {
 
 .container {
   background-image: url(image.jpg);
-  background-size: cover;
-  height: 1200px;
-  width: 1000px;
+  height: 750px;
+  width: 500px;
   margin-top: 200px;
   display: flex;
   align-items: center;
@@ -151,10 +148,13 @@ label {
 
 #start_timer {
   display: none;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
   font-family: "Kdam Thmor Pro", sans-serif;
   margin-top: 15px;
   position: absolute;
-  font-size: 200px;
+  font-size: 120px;
   -webkit-text-stroke: 5px black;
   text-shadow: 5px 5px 5px rgb(72, 181, 224);
   color: gold;
@@ -174,7 +174,7 @@ label {
   font-family: "Kdam Thmor Pro", sans-serif;
   margin-top: 15px;
   position: absolute;
-  font-size: 200px;
+  font-size: 150px;
   -webkit-text-stroke: 5px rgb(0, 0, 0);
   text-shadow: 5px 5px 5px gold;
   color: rgb(20, 189, 28);
