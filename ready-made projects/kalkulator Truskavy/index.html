@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+    <script defer src="src/app.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+    <title>Kalkulator Truskavy</title>
+  </head>
+  <body>
+    <img src="src/img/giphy.gif" />
+    <div>
+      <section class="sekcja_brutto">
+        <h1>Kwota Netto</h1>
+        <label
+          ><input type="number" placeholder="Wpisz kwotę netto" id="label"
+        /></label>
+        <select onchange="zmiana ()" id="select">
+          <option value="0">Wybierz VAT</option>
+          <option value="0">0% VAT</option>
+          <option value="0.05">5% VAT</option>
+          <option value="0.08">8% VAT</option>
+          <option value="0.23">23% VAT</option>
+        </select>
+        <button id="oblicz">Oblicz</button>
+        <button id="wyczysc">Wyczyść</button>
+        <h2>Kwota Brutto</h2>
+        <p id="brutto">Wynik</p>
+        <h2>67% od kwoty brutto</h2>
+        <p id="67-od-brutto">Wynik</p>
+        <h2>33% od kwoty brutto</h2>
+        <p class="text" id="33-od-brutto">Wynik</p>
+      </section>
+      <section class="sekcja_vat">
+        <h1>Kwota VAT</h1>
+        <p id="kwota-vat">Wynik</p>
+        <h2>67% od kwoty VAT</h2>
+        <p id="67-od-vat">Wynik</p>
+        <h2>33% od kwoty VAT</h2>
+        <p id="33-od-vat">Wynik</p>
+      </section>
+    </div>
+  </body>
+</html>

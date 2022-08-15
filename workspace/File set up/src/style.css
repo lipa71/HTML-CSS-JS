@@ -1,0 +1,14 @@
+body {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+}    
+
+.display {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    border-radius: 100px;
+    margin-top: 200px;
+}
