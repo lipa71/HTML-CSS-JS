@@ -1,66 +1,58 @@
+const oblicz = document.getElementById("oblicz");
+const wyczysc = document.getElementById("wyczysc");
+const kwota_netto = document.getElementById("label");
+const kwota_brutto = document.getElementById("brutto");
+const od_brutto65 = document.getElementById("65-od-brutto");
+const od_brutto35 = document.getElementById("35-od-brutto");
+const kwota_vat = document.getElementById("kwota-vat");
+const od_vat65 = document.getElementById("65-od-vat");
+const od_vat35 = document.getElementById("35-od-vat");
 
-const oblicz = document.getElementById('oblicz');
-const wyczysc = document.getElementById('wyczysc');
-const kwota_netto = document.getElementById('label');
-const kwota_brutto = document.getElementById('brutto');
-const od_brutto67 = document.getElementById('67-od-brutto');
-const od_brutto33 = document.getElementById('33-od-brutto');
-const kwota_vat = document.getElementById('kwota-vat');
-const od_vat67 = document.getElementById('67-od-vat');
-const od_vat33 = document.getElementById('33-od-vat');
+function zmiana() {
+  opcja = document.getElementById("select");
 
+  function liczenie() {
+    let vat = (kwota_vat.innerText =
+      Math.round(kwota_netto.value * opcja.value * 100 + Number.EPSILON) / 100);
 
-function zmiana () {
+    let brutto = (kwota_brutto.innerText = kwota_netto.valueAsNumber + vat);
 
-        opcja = document.getElementById('select');
+    od_brutto65.innerText =
+      Math.round(brutto * 0.65 * 100 + Number.EPSILON) / 100;
 
-    function liczenie () {
+    od_brutto35.innerText =
+      Math.round(brutto * 0.35 * 100 + Number.EPSILON) / 100;
 
-        let vat = kwota_vat.innerText=
-         Math.round((kwota_netto.value * opcja.value) * 100 + Number.EPSILON) / 100;
+    od_vat65.innerText =
+      Math.round(
+        kwota_netto.value * opcja.value * 0.65 * 100 + Number.EPSILON
+      ) / 100;
 
-        let brutto = kwota_brutto.innerText=
-         kwota_netto.valueAsNumber + vat
+    od_vat35.innerText =
+      Math.round(
+        kwota_netto.value * opcja.value * 0.35 * 100 + Number.EPSILON
+      ) / 100;
 
-        od_brutto67.innerText=
-         Math.round((brutto * 0.67) * 100 + Number.EPSILON) / 100;
+    kwota_brutto.style.visibility = "visible";
+    od_brutto65.style.visibility = "visible";
+    od_brutto35.style.visibility = "visible";
+    kwota_vat.style.visibility = "visible";
+    od_vat65.style.visibility = "visible";
+    od_vat35.style.visibility = "visible";
+  }
+  oblicz.addEventListener("click", liczenie);
 
-        od_brutto33.innerText=
-         Math.round((brutto * 0.33) * 100 + Number.EPSILON) / 100;
-        
-        od_vat67.innerText=
-         Math.round(((kwota_netto.value * opcja.value) * 0.67) * 100 + Number.EPSILON) / 100;
-    
-        od_vat33.innerText=
-         Math.round(((kwota_netto.value * opcja.value) * 0.33) * 100 + Number.EPSILON) / 100;
-        
-        kwota_brutto.style.visibility = 'visible';
-        od_brutto67.style.visibility = 'visible';
-        od_brutto33.style.visibility = 'visible';        
-        kwota_vat.style.visibility = 'visible';
-        od_vat67.style.visibility = 'visible';
-        od_vat33.style.visibility = 'visible';
-
-    }
-    oblicz.addEventListener ('click' , liczenie);
-
-
-function czyszczenie () {
-
-    kwota_netto.value = '';
+  function czyszczenie() {
+    kwota_netto.value = "";
 
     opcja.selectedIndex = null;
 
-    kwota_brutto.style.visibility = 'hidden';
-    od_brutto67.style.visibility = 'hidden';
-    od_brutto33.style.visibility = 'hidden';
-    kwota_vat.style.visibility = 'hidden';
-    od_vat67.style.visibility = 'hidden';
-    od_vat33.style.visibility = 'hidden';
-
-
-
-
+    kwota_brutto.style.visibility = "hidden";
+    od_brutto65.style.visibility = "hidden";
+    od_brutto35.style.visibility = "hidden";
+    kwota_vat.style.visibility = "hidden";
+    od_vat65.style.visibility = "hidden";
+    od_vat35.style.visibility = "hidden";
+  }
+  wyczysc.addEventListener("click", czyszczenie);
 }
-wyczysc.addEventListener ('click' , czyszczenie);
-};
